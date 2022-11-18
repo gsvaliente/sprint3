@@ -1,4 +1,4 @@
-const { readdir, readFile, writeFile } = require("fs");
+const { readdir, readFile, writeFile } = require("fs").promises;
 const { join } = require("path");
 const inbox = join(__dirname, "inbox");
 const outbox = join(__dirname, "outbox");

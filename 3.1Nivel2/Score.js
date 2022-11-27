@@ -36,6 +36,13 @@ class Score {
       });
     });
   }
+
+  showWinner() {
+    console.log(`WINNERS`);
+    this.scores.forEach((game) => {
+      console.log(`${game.name}: ${game.players[0].name}`);
+    });
+  }
 }
 
 module.exports = Score;

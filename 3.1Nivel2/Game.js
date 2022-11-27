@@ -30,6 +30,10 @@ class Game {
   showScore() {
     this.score.showScore();
   }
+
+  showWinner() {
+    this.score.showWinner();
+  }
 }
 
 const game = new Game("game");
@@ -40,3 +44,4 @@ game.modifyScore(gabriel, 20);
 game.modifyScore(teo, 40);
 // console.log(game);
 game.showScore();
+game.showWinner();

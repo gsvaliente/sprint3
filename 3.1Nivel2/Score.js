@@ -16,6 +16,26 @@ class Score {
       this.scores[index] = game;
     }
   }
+
+  compareScore(a, b) {
+    return b.pts - a.pts;
+  }
+
+  sortScore() {
+    this.scores.forEach((game) => {
+      game.players.sort(this.compareScore);
+    });
+  }
+
+  showScore() {
+    this.sortScore();
+    this.scores.forEach((game) => {
+      console.log(`${game.name}`);
+      game.players.forEach((player) => {
+        console.log(`${player.name}: ${player.pts}`);
+      });
+    });
+  }
 }
 
 module.exports = Score;

@@ -26,6 +26,10 @@ class Game {
       this.score.refreshScore(this);
     }
   }
+
+  showScore() {
+    this.score.showScore();
+  }
 }
 
 const game = new Game("game");
@@ -34,4 +38,5 @@ const teo = game.addPlayer("Teo");
 game.modifyScore(gabriel, 20);
 // game.modifyScore(gabriel, -10);
 game.modifyScore(teo, 40);
-console.log(game);
+// console.log(game);
+game.showScore();

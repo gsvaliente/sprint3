@@ -19,14 +19,14 @@ class Score {
     return b.pts - a.pts;
   }
 
-  sortScore() {
+  orderScore() {
     this.scores.forEach((game) => {
       game.playerList.sort(this.compareScore);
     });
   }
 
   showScore() {
-    this.sortScore();
+    this.orderScore();
     console.log(`SCOREBOARD`);
     this.scores.forEach((game) => {
       console.log(`${game.name}`);

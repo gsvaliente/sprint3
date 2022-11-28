@@ -4,7 +4,7 @@ const Score = require("./Score");
 class Game {
   constructor(name) {
     this.name = name;
-    this.players = [];
+    this.playerList = [];
   }
 
   get score() {
@@ -13,15 +13,15 @@ class Game {
 
   addPlayer(name) {
     const player = new Player(name);
-    this.players.push(player);
+    this.playerList.push(player);
     this.score.refreshScore(this);
     return player;
   }
 
   modifyScore(player, amount) {
-    const index = this.players.findIndex((name) => name === player);
+    const index = this.playerList.findIndex((name) => name === player);
     if (index !== -1) {
-      this.players[index].pts = this.players[index].pts + amount;
+      this.playerList[index].pts = this.playerList[index].pts + amount;
 
       this.score.refreshScore(this);
     }
@@ -36,12 +36,4 @@ class Game {
   }
 }
 
-const game = new Game("game");
-const gabriel = game.addPlayer("Gabriel");
-const teo = game.addPlayer("Teo");
-game.modifyScore(gabriel, 20);
-// game.modifyScore(gabriel, -10);
-game.modifyScore(teo, 40);
-// console.log(game);
-game.showScore();
-game.showWinner();
+module.exports = Game;

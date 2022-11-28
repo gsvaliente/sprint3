@@ -23,24 +23,27 @@ class Score {
 
   sortScore() {
     this.scores.forEach((game) => {
-      game.players.sort(this.compareScore);
+      game.playerList.sort(this.compareScore);
     });
   }
 
   showScore() {
     this.sortScore();
+    console.log(`LEADER BOARD`);
     this.scores.forEach((game) => {
       console.log(`${game.name}`);
-      game.players.forEach((player) => {
+      game.playerList.forEach((player) => {
         console.log(`${player.name}: ${player.pts}`);
       });
     });
   }
 
   showWinner() {
+    console.log(`----------`);
     console.log(`WINNERS`);
+    console.log(`----------`);
     this.scores.forEach((game) => {
-      console.log(`${game.name}: ${game.players[0].name}`);
+      console.log(`${game.name}: ${game.playerList[0].name}`);
     });
   }
 }

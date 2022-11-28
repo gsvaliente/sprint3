@@ -21,8 +21,7 @@ class Game {
   modifyScore(player, amount) {
     const index = this.playerList.findIndex((name) => name === player);
     if (index !== -1) {
-      this.playerList[index].pts = this.playerList[index].pts + amount;
-
+      this.playerList[index].pts += amount;
       this.score.addToScore(this);
     }
   }

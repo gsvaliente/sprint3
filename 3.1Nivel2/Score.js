@@ -29,7 +29,7 @@ class Score {
     this.orderScore();
     console.log(`SCOREBOARD`);
     this.scores.forEach((game) => {
-      console.log(`${game.name}`);
+      console.log(`${game.name.toUpperCase()}`);
       game.playerList.forEach((player) => {
         console.log(`${player.name}: ${player.pts}`);
       });

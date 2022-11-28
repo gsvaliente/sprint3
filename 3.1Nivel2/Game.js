@@ -14,7 +14,7 @@ class Game {
   addPlayer(name) {
     const player = new Player(name);
     this.playerList.push(player);
-    this.score.refreshScore(this);
+    this.score.addToScore(this);
     return player;
   }
 
@@ -23,7 +23,7 @@ class Game {
     if (index !== -1) {
       this.playerList[index].pts = this.playerList[index].pts + amount;
 
-      this.score.refreshScore(this);
+      this.score.addToScore(this);
     }
   }
 

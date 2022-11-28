@@ -9,7 +9,7 @@ const p2 = game.addPlayer("player2");
 
 // adding scores
 game.modifyScore(p1, 30);
-game.modifyScore(p2, 10);
+game.modifyScore(p2, 30);
 game.modifyScore(p1, -15);
 
 // showing scores

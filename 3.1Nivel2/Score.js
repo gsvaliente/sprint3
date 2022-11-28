@@ -8,12 +8,10 @@ class Score {
     Score.instance = this;
   }
 
-  refreshScore(game) {
-    const index = this.scores.findIndex((item) => item.name === game.name);
-    if (index === -1) {
+  addToScore(game) {
+    const hasGame = this.scores.includes(game);
+    if (!hasGame) {
       this.scores.push(game);
-    } else {
-      this.scores[index] = game;
     }
   }
 
@@ -29,7 +27,7 @@ class Score {
 
   showScore() {
     this.sortScore();
-    console.log(`LEADER BOARD`);
+    console.log(`SCOREBOARD`);
     this.scores.forEach((game) => {
       console.log(`${game.name}`);
       game.playerList.forEach((player) => {

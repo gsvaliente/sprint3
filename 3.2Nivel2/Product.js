@@ -5,3 +5,5 @@ class Product {
     this.currency = currency;
   }
 }
+
+module.exports = Product;

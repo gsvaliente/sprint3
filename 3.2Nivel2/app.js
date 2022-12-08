@@ -13,11 +13,13 @@ const xboxX = new Decorator(xbox);
 const watch = new Decorator(appleWatch);
 const fitbit = new Decorator(fitBit);
 
-// USING THE DECORATED PRODUCT
-ps5.convert("EUR");
-xboxX.convert("EUR");
-watch.convert("EUR");
-fitbit.convert("EUR");
+// CREATING AN ARRAY OF DECORATED PRODUCTS
+const products = [ps5, xboxX, watch, fitbit];
+
+// CONVERTING THE PRICE TO EUROS
+products.forEach((product) => {
+  product.convert("EUR");
+});
 
 // IF TRYING TO CONVERT TO A CURRENCY THAT IS NOT EUR
 ps5.convert("GBP"); // THROWS AN ERROR

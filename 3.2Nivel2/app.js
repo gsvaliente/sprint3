@@ -1,18 +1,23 @@
 const Decorator = require("./Decorator");
 const Product = require("./Product");
-const convertFunction = require("./Decorator");
 
-// CREATING PRODUCTS
+// CREATING INSTANCES OF THE PRODUCT CLASS
 const playStation = new Product("PlayStation 5", 499, "USD");
 const xbox = new Product("Xbox Series X", 399, "GBP");
+const appleWatch = new Product("Apple Watch Series 8", 96637, "JPY");
+const fitBit = new Product("FITBIT Versa 4", 200, "CHF");
 
-// TESTING DECORATOR
-// const playStationPrice = new Decorator(playStation);
-// const xboxPrice = new Decorator(xbox);
+// DECORATING PRODUCT TO HAVE A NEW METHOD OF CONVERTING
+const ps5 = new Decorator(playStation);
+const xboxX = new Decorator(xbox);
+const watch = new Decorator(appleWatch);
+const fitbit = new Decorator(fitBit);
 
-// TESTING CONVERSION
-// playStationPrice.convert("EUR");
-// xboxPrice.convert("EUR");
+// USING THE DECORATED PRODUCT
+ps5.convert("EUR");
+xboxX.convert("EUR");
+watch.convert("EUR");
+fitbit.convert("EUR");
 
-convertFunction(playStation);
-playStation.convert("EUR");
+// IF TRYING TO CONVERT TO A CURRENCY THAT IS NOT EUR
+ps5.convert("GBP"); // THROWS AN ERROR

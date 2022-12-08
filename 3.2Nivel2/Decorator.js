@@ -18,21 +18,14 @@ class Decorator {
   }
 
   convert(currency) {
-    const re = new RegExp(this.getCurrency + "_" + currency);
-    const conversion = this.getPrice * Object.entries(conversionRates).find((k) => re.test(k))[1];
+    if (currency !== "EUR") {
+      throw "Calculator only converts to EUR";
+    }
+    const keyRate = `${this.getCurrency}_${currency}`;
+    const conversion = (this.getPrice * conversionRates[keyRate]).toFixed(2);
     console.log(`${this.getCurrency} converted to ${currency}`);
-    console.log(conversion);
+    console.log(`${this.getProduct.name} is ${conversion} EUROS\n`);
   }
 }
 
-const convertFunction = (product) => {
-  product.convert = (currency) => {
-    const re = new RegExp(this.getCurrency + "_" + currency);
-    const conversion = product.price * Object.entries(conversionRates).find((k) => re.test(k))[1];
-    console.log(`${product.currency} converted to ${currency}`);
-    console.log(conversion);
-  };
-};
-
-module.exports = convertFunction;
-// module.exports = Decorator;
+module.exports = Decorator;

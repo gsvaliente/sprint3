@@ -6,7 +6,7 @@ class Theme {
     this.userList = [];
   }
 
-  subscribeUser(user) {
+  addUser(user) {
     if (!this.userList.includes(user)) {
       this.userList.push(user);
       console.log(`${user.name} has been added to '${this.name}'`);
@@ -14,9 +14,10 @@ class Theme {
       console.log(`${user.name} is already a member of '${this.name}'`);
     }
   }
+
+  sendMessage(user, message, theme) {
+    console.log(`${user.name} has sent ${message}`);
+  }
 }
 
-const theme = new Theme("dogs");
-const user = new User("Gabriel");
-theme.subscribeUser(user);
-theme.subscribeUser(user);
+module.exports = Theme;

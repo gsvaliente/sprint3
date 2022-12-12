@@ -3,8 +3,8 @@ class User {
     this.name = name;
   }
 
-  showUser(name) {
-    console.log(`${name} has been added to `);
+  sendMessage(theme, message) {
+    console.log(`${this.name} has posted: ${message}`);
   }
 }
 

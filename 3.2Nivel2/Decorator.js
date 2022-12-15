@@ -29,11 +29,15 @@ const Product = require('./Product');
 //   }
 // }
 
-const playStation = new Product('PlayStation 5', 499, 'USD');
-const xbox = new Product('Xbox Series X', 399, 'GBP');
-
 const decorator = (item) => {
   item.convert = (currency) => {
+    if (item.currency === 'EUR') {
+      throw 'CANNOT CONVERT THE SAME CURRENCY';
+    }
+    if (currency !== 'EUR') {
+      throw 'CURRENCY NOT SUPPORTED AT THIS TIME';
+    }
+
     const keyRate = `${item.currency}_${currency}`;
     const conversion = (item.price * conversionRates[keyRate]).toFixed(2);
     console.log(`${item.currency} converted to ${currency}`);
@@ -41,10 +45,5 @@ const decorator = (item) => {
     console.log(`${item.name} is ${conversion} EUROS\n`);
   };
 };
-
-decorator(playStation);
-decorator(xbox);
-playStation.convert('EUR');
-xbox.convert('EUR');
 
 module.exports = decorator;

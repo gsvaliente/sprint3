@@ -1,18 +1,34 @@
-const Middleware = require("./Middleware");
+const Calculator = require('./Calculator');
+const Middleware = require('./Middleware');
+const { readFileSync } = require('fs');
 
-class Operations {
-  add = (a, b) => a + b;
-  subtract = (a, b) => a - b;
-  multiply = (a, b) => a * b;
-}
+const file = JSON.parse(readFileSync(`${__dirname}/data.json`, 'utf-8'));
+const { a, b } = file;
 
-const calc = new Operations();
+const calculator = new Calculator();
+const app = new Middleware(calculator);
 
-try1 = calc.add(2, 2);
-try2 = calc.subtract(10, 4);
-try3 = calc.multiply(5, 5);
-console.log({
-  add: try1,
-  subtract: try2,
-  multiply: try3,
+app.use((req, res, next) => {
+  req.a = req.a ** 2;
+  req.b = req.b ** 2;
+  console.log(req);
+  next();
 });
+
+app.use((req, res, next) => {
+  req.a = req.a ** 3;
+  req.b = req.b ** 3;
+  next();
+});
+
+app.use((req, res, next) => {
+  req.a = req.a / 2;
+  req.b = req.b / 2;
+  next();
+});
+
+let add = app.add(a, b);
+let sub = app.subtract(a, b);
+let mult = app.multiply(a, b);
+
+console.log(add, sub, mult);

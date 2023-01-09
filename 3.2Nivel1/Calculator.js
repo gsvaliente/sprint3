@@ -1,12 +1,12 @@
 class Calculator {
-  add(num1, num2) {
-    return num1 + num2;
+  add({ a, b }) {
+    return a + b;
   }
-  subtract(num1, num2) {
-    return num1 - num2;
+  subtract({ a, b }) {
+    return a - b;
   }
-  multiply(num1, num2) {
-    return num1 * num2;
+  multiply({ a, b }) {
+    return a * b;
   }
 }
 

@@ -1,28 +1,33 @@
-class Middleware {
+class Middlewares {
   constructor(target) {
     this.target = target;
-    this.middlewares = [];
+    this.Middlewares = [];
     this.req = {};
-    const prototype = Object.getPrototypeOf(this.target);
-    Object.getOwnPropertyNames(prototype).forEach(fn => {
-      if (fn !== 'constructor') return this.createFn(fn);
-    });
-  }
-  use(middleware) {
-    this.middlewares.push(middleware);
-  }
-  executeMiddleware(i = 0) {
-    if (i < this.middlewares.length) {
-      this.middlewares[i].call(this, this.req, () => this.executeMiddleware(i + 1));
+
+    const proto = Object.getPrototypeOf(this.target);
+    const propertyNames = Object.getOwnPropertyNames(proto);
+    for (let property of propertyNames) {
+      if (property !== 'constructor') {
+        this[property] = args => {
+          this.req = { ...args };
+          this.executeMiddleware(0);
+          return proto[property].call(this, this.req);
+        };
+      }
     }
   }
-  createFn(fn) {
-    this[fn] = args => {
-      this.req = args;
-      this.executeMiddleware();
-      return this.target[fn].call(this, this.req);
-    };
+
+  executeMiddleware(index) {
+    if (index < this.Middlewares.length - 1) {
+      this.Middlewares[index].call(this, this.req, () => this.executeMiddleware(index + 1));
+    } else if ((index = this.Middlewares.length - 1)) {
+      this.Middlewares[index].call(this, this.req, () => {});
+    }
+  }
+
+  use(func) {
+    this.Middlewares.push(func);
   }
 }
 
-module.exports = Middleware;
+module.exports = Middlewares;

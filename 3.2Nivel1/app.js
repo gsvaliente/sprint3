@@ -3,32 +3,38 @@ const Middleware = require('./Middleware');
 const { readFileSync } = require('fs');
 
 const file = JSON.parse(readFileSync(`${__dirname}/data.json`, 'utf-8'));
-const { a, b } = file;
+const { a: num1, b: num2 } = file;
 
-const calculator = new Calculator();
-const app = new Middleware(calculator);
+const calc = new Calculator();
+const app = new Middleware(calc);
 
-app.use((req, res, next) => {
-  req.a = req.a ** 2;
-  req.b = req.b ** 2;
-  console.log(req);
+//* SETTING UP THE MIDDLEWARE
+app.use((num, next) => {
+  num.a = num.a ** 2;
+  num.b = num.b ** 2;
+  // this should square the numbers
   next();
 });
 
-app.use((req, res, next) => {
-  req.a = req.a ** 3;
-  req.b = req.b ** 3;
+app.use((num, next) => {
+  num.a = num.a ** 3;
+  num.b = num.b ** 3;
+  // this should cube the numbers
   next();
 });
 
-app.use((req, res, next) => {
-  req.a = req.a / 2;
-  req.b = req.b / 2;
+app.use((num, next) => {
+  num.a = num.a / 2;
+  num.b = num.b / 2;
+  // this should half the numbers
   next();
 });
 
-let add = app.add(a, b);
-let sub = app.subtract(a, b);
-let mult = app.multiply(a, b);
+//* THIS IS NOW USING THE CALC METHODS DIRECTLY
+let add = app.add({ a: num1, b: num2 });
+let sub = app.subtract({ a: num1, b: num2 });
+let multi = app.multiply({ a: num1, b: num2 });
 
-console.log(add, sub, mult);
+console.log(`The result of adding ${num1} and ${num2} after the middleware is ${add}`);
+console.log(`The result of subtracting ${num1} and ${num2} after the middleware is ${sub}`);
+console.log(`The result of multiplying ${num1} and ${num2} after the middleware is ${multi}`);
